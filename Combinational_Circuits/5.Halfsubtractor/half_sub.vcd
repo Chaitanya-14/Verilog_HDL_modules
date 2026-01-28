@@ -1,0 +1,49 @@
+$date
+	Wed Jan 28 21:41:56 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module half_sub_tb $end
+$var wire 1 ! d $end
+$var wire 1 " bo $end
+$var reg 1 # a $end
+$var reg 1 $ b $end
+$scope module uut $end
+$var wire 1 # a $end
+$var wire 1 $ b $end
+$var wire 1 " bo $end
+$var wire 1 ! d $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+x$
+x#
+x"
+x!
+$end
+#20000
+0"
+0!
+0$
+0#
+#30000
+1!
+1"
+1$
+#40000
+0"
+0$
+1#
+#50000
+0!
+1$
+#60000
