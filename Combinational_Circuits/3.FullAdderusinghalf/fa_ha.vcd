@@ -1,0 +1,96 @@
+$date
+	Wed Jan 28 12:50:59 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module fa_ha_tb $end
+$var wire 1 ! s $end
+$var wire 1 " cout $end
+$var reg 1 # a $end
+$var reg 1 $ b $end
+$var reg 1 % cin $end
+$scope module uut $end
+$var wire 1 # a $end
+$var wire 1 $ b $end
+$var wire 1 % cin $end
+$var wire 1 " cout $end
+$var wire 1 & w2 $end
+$var wire 1 ' w1 $end
+$var wire 1 ( s1 $end
+$var wire 1 ! s $end
+$scope module HA1 $end
+$var wire 1 # a $end
+$var wire 1 $ b $end
+$var wire 1 ' c $end
+$var wire 1 ( s $end
+$upscope $end
+$scope module HA2 $end
+$var wire 1 ( a $end
+$var wire 1 % b $end
+$var wire 1 & c $end
+$var wire 1 ! s $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+x(
+x'
+x&
+x%
+x$
+x#
+x"
+x!
+$end
+#10000
+0"
+0!
+0&
+0(
+0'
+0%
+0$
+0#
+#20000
+1!
+1%
+#30000
+1(
+0%
+1$
+#40000
+1"
+0!
+1&
+1%
+#50000
+0"
+1!
+0&
+0%
+0$
+1#
+#60000
+1"
+0!
+1&
+1%
+#70000
+0&
+0(
+1'
+0%
+1$
+#80000
+1!
+1%
+#100000
