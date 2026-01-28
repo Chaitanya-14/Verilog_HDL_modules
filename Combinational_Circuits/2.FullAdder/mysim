@@ -1,0 +1,105 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x1008c27d0 .scope module, "fulladder_tb" "fulladder_tb" 2 3;
+ .timescale -9 -12;
+v0x1008c9a00_0 .net "c_out", 0 0, L_0x1008c9e40;  1 drivers
+v0x1008c9aa0_0 .var "p", 0 0;
+v0x1008c9b40_0 .var "q", 0 0;
+v0x1008c9be0_0 .var "r", 0 0;
+v0xaaec2c000_0 .net "sum", 0 0, L_0x1008c9cf0;  1 drivers
+S_0x1008c0800 .scope module, "uut" "fulladder" 2 7, 3 1 0, S_0x1008c27d0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /INPUT 1 "c";
+    .port_info 3 /OUTPUT 1 "s";
+    .port_info 4 /OUTPUT 1 "cout";
+L_0x1008c9c80 .functor XOR 1, v0x1008c9aa0_0, v0x1008c9b40_0, C4<0>, C4<0>;
+L_0x1008c9cf0 .functor XOR 1, L_0x1008c9c80, v0x1008c9be0_0, C4<0>, C4<0>;
+L_0x1008c9d60 .functor AND 1, L_0x1008c9c80, v0x1008c9be0_0, C4<1>, C4<1>;
+L_0x1008c9dd0 .functor AND 1, v0x1008c9aa0_0, v0x1008c9b40_0, C4<1>, C4<1>;
+L_0x1008c9e40 .functor OR 1, L_0x1008c9d60, L_0x1008c9dd0, C4<0>, C4<0>;
+v0x1008c0980_0 .net "a", 0 0, v0x1008c9aa0_0;  1 drivers
+v0x1008c95a0_0 .net "b", 0 0, v0x1008c9b40_0;  1 drivers
+v0x1008c9640_0 .net "c", 0 0, v0x1008c9be0_0;  1 drivers
+v0x1008c96e0_0 .net "cout", 0 0, L_0x1008c9e40;  alias, 1 drivers
+v0x1008c9780_0 .net "s", 0 0, L_0x1008c9cf0;  alias, 1 drivers
+v0x1008c9820_0 .net "t1", 0 0, L_0x1008c9c80;  1 drivers
+v0x1008c98c0_0 .net "t2", 0 0, L_0x1008c9d60;  1 drivers
+v0x1008c9960_0 .net "t3", 0 0, L_0x1008c9dd0;  1 drivers
+    .scope S_0x1008c27d0;
+T_0 ;
+    %vpi_call 2 11 "$dumpfile", "fulladder.vcd" {0 0 0};
+    %vpi_call 2 12 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x1008c27d0 {0 0 0};
+    %vpi_call 2 13 "$monitor", "Time=%0t|a=%b|b=%b|c=%b|sum=%b|cout=%b", $time, v0x1008c9aa0_0, v0x1008c9b40_0, v0x1008c9be0_0, v0xaaec2c000_0, v0x1008c9a00_0 {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x1008c9aa0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x1008c9b40_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x1008c9be0_0, 0, 1;
+    %delay 10000, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x1008c9aa0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x1008c9b40_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x1008c9be0_0, 0, 1;
+    %delay 10000, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x1008c9aa0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x1008c9b40_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x1008c9be0_0, 0, 1;
+    %delay 10000, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x1008c9aa0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x1008c9b40_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x1008c9be0_0, 0, 1;
+    %delay 10000, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x1008c9aa0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x1008c9b40_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x1008c9be0_0, 0, 1;
+    %delay 10000, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x1008c9aa0_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x1008c9b40_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x1008c9be0_0, 0, 1;
+    %delay 10000, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x1008c9aa0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x1008c9b40_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x1008c9be0_0, 0, 1;
+    %delay 10000, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x1008c9aa0_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x1008c9b40_0, 0, 1;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x1008c9be0_0, 0, 1;
+    %delay 10000, 0;
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "fulladder_tb.v";
+    "fulladder.v";

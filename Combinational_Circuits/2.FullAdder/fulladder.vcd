@@ -1,0 +1,75 @@
+$date
+	Thu Jan 15 18:47:32 2026
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module fulladder_tb $end
+$var wire 1 ! sum $end
+$var wire 1 " c_out $end
+$var reg 1 # p $end
+$var reg 1 $ q $end
+$var reg 1 % r $end
+$scope module uut $end
+$var wire 1 # a $end
+$var wire 1 $ b $end
+$var wire 1 % c $end
+$var wire 1 " cout $end
+$var wire 1 ! s $end
+$var wire 1 & t1 $end
+$var wire 1 ' t2 $end
+$var wire 1 ( t3 $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+$comment Show the parameter values. $end
+$dumpall
+$end
+#0
+$dumpvars
+0(
+0'
+0&
+0%
+0$
+0#
+0"
+0!
+$end
+#10000
+1!
+1%
+#20000
+1&
+0%
+1$
+#30000
+1"
+0!
+1'
+1%
+#40000
+0"
+1!
+0'
+0%
+0$
+1#
+#50000
+1"
+0!
+1'
+1%
+#60000
+0'
+0&
+1(
+0%
+1$
+#70000
+1!
+1%
+#80000

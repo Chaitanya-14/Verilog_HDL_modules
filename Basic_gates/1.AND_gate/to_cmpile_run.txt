@@ -1,0 +1,24 @@
+step 1 first write verilog .v code 
+
+then write the testbench code .v
+
+
+run the command iverilog -o mysim simple_and.v simple_and_tb.v
+
+this will create mysim file for visualisation
+
+then use vvp mysim to generate .vcd file for visulalisation
+
+mysim file for output viewing in terminal
+
+use gtkwave simpleand.vcd for waveform
+If the screen is black/blank when it opens:
+Find the Hierarchy: Look at the left panel (SST). Click the + next to simpleand_tb.
+Select the Module: Click on uut (or just simpleand_tb if you want to see testbench signals).
+Select Signals: In the list below, you will see a, b, and f.
+Click a, hold Shift, and click f to select all of them.
+Add to Graph: Drag them into the black area, or click the "Append" / "Insert" button.
+Zoom Out: If the lines look flat, click the Zoom Fit icon (usually looks like a magnifying glass with a square inside [ ]) or press Cmd + Option + F.
+
+
+
