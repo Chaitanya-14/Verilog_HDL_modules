@@ -77,6 +77,14 @@ task delay();
     end
 endtask
 
+//process to display the output
+initial 
+  begin
+    $monitor("Input oe=%b, a=%b, b=%b, command=%s , Output d_out=%b",enable, a,b, string_command, d_out);
+    $dumpfile("alu_tb.vcd");
+    $dumpvars(0,alu_tb);
+  end
+
 
 // process to hold the string values as per the commands.
 always @(command)
@@ -110,10 +118,10 @@ initial
                  for (n=0;n<16;n++)
                     begin
                       inputs (m,n);
-                      for(o=0;0<16;0++)
-                        begin
-                          command =o;
-                          delay;
+                        for(o=0;0<16;o++)
+                          begin
+                            command =o;
+                            delay;
                         end
                     end
             end
@@ -129,9 +137,5 @@ initial
     $finish;
 end
     
-//process to display the output
-initial 
-    $monitor("Input oe=%b, a=%b, b=%b, command=%s , Output d_out=%b",enable, a,b, string_command, d_out);
-    $dumpfile("alu_tb.vcd");
-    $dumpvars(0,alu_tb);
+
 endmodule
