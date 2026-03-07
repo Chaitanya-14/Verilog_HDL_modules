@@ -1,0 +1,8 @@
+module fa_df(a_in,b_in,c_in,sum_out,c_out);
+    input a_in,b_in,c_in;
+    output sum_out,c_out;
+
+    assign sum_out = a_in ^ b_in ^ c_in;
+    assign c_out = (a_in & b_in) | (c_in & (a_in ^ b_in));
+
+endmodule
