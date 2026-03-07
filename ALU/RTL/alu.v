@@ -31,6 +31,8 @@ begin
     SUB:   out = b_in - a_in;
     MUL:   out = a_in * b_in;
     DIV:   out = b_in / a_in;
+    INC:   out = a_in + 1;
+    DEC:   out = a_in - 1;
     SHL:   out = a_in << 1'b1;
     SHR:   out = a_in >> 1'b1;
     AND:   out = a_in & b_in;
