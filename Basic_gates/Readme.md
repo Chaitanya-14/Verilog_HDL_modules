@@ -32,7 +32,7 @@ vvp mysim
 - **File Output**: A file named `simpleand.vcd` (or whatever name you defined in `$dumpfile` inside your testbench) is created.
 
 ---
-
+                            
 ## Step 4: Visualize Waveforms
 Open the Value Change Dump (`.vcd`) file using GTKWave to see the timing diagram.
 
