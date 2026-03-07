@@ -58,7 +58,7 @@ ALU/
 
 ## Simulation
 
-### Running the Simulation
+### Running the Simulation in icarus verilog and GTK wave
 
 1. **Compile the design:**
    ```bash
