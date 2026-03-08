@@ -1,0 +1,207 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x101642c00 .scope module, "four_one_mux_selfcheck_tb" "four_one_mux_selfcheck_tb" 2 3;
+ .timescale -9 -12;
+v0x976c646e0_0 .var "expected_y", 0 0;
+v0x976c64780_0 .var/i "fail_count", 31 0;
+v0x976c64820_0 .var/i "i", 31 0;
+v0x976c648c0_0 .var "i0", 0 0;
+v0x976c64960_0 .var "i1", 0 0;
+v0x976c64a00_0 .var "i2", 0 0;
+v0x976c64aa0_0 .var "i3", 0 0;
+v0x976c64b40_0 .var/i "j", 31 0;
+v0x976c64be0_0 .var/i "pass_count", 31 0;
+v0x976c64c80_0 .var "sel", 1 0;
+v0x976c64d20_0 .net "y", 0 0, L_0x101650a70;  1 drivers
+S_0x101642d80 .scope task, "apply_and_check" "apply_and_check" 2 21, 2 21 0, S_0x101642c00;
+ .timescale -9 -12;
+v0x10164e2c0_0 .var "data", 3 0;
+v0x101646020_0 .var "s", 1 0;
+TD_four_one_mux_selfcheck_tb.apply_and_check ;
+    %load/vec4 v0x10164e2c0_0;
+    %split/vec4 1;
+    %store/vec4 v0x976c64aa0_0, 0, 1;
+    %split/vec4 1;
+    %store/vec4 v0x976c64a00_0, 0, 1;
+    %split/vec4 1;
+    %store/vec4 v0x976c64960_0, 0, 1;
+    %store/vec4 v0x976c648c0_0, 0, 1;
+    %load/vec4 v0x101646020_0;
+    %store/vec4 v0x976c64c80_0, 0, 2;
+    %delay 10000, 0;
+    %load/vec4 v0x976c64c80_0;
+    %dup/vec4;
+    %pushi/vec4 0, 0, 2;
+    %cmp/u;
+    %jmp/1 T_0.0, 6;
+    %dup/vec4;
+    %pushi/vec4 1, 0, 2;
+    %cmp/u;
+    %jmp/1 T_0.1, 6;
+    %dup/vec4;
+    %pushi/vec4 2, 0, 2;
+    %cmp/u;
+    %jmp/1 T_0.2, 6;
+    %dup/vec4;
+    %pushi/vec4 3, 0, 2;
+    %cmp/u;
+    %jmp/1 T_0.3, 6;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x976c646e0_0, 0, 1;
+    %jmp T_0.5;
+T_0.0 ;
+    %load/vec4 v0x976c648c0_0;
+    %store/vec4 v0x976c646e0_0, 0, 1;
+    %jmp T_0.5;
+T_0.1 ;
+    %load/vec4 v0x976c64960_0;
+    %store/vec4 v0x976c646e0_0, 0, 1;
+    %jmp T_0.5;
+T_0.2 ;
+    %load/vec4 v0x976c64a00_0;
+    %store/vec4 v0x976c646e0_0, 0, 1;
+    %jmp T_0.5;
+T_0.3 ;
+    %load/vec4 v0x976c64aa0_0;
+    %store/vec4 v0x976c646e0_0, 0, 1;
+    %jmp T_0.5;
+T_0.5 ;
+    %pop/vec4 1;
+    %load/vec4 v0x976c64d20_0;
+    %load/vec4 v0x976c646e0_0;
+    %cmp/e;
+    %jmp/0xz  T_0.6, 6;
+    %load/vec4 v0x976c64be0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x976c64be0_0, 0, 32;
+    %jmp T_0.7;
+T_0.6 ;
+    %load/vec4 v0x976c64780_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x976c64780_0, 0, 32;
+    %load/vec4 v0x976c648c0_0;
+    %load/vec4 v0x976c64960_0;
+    %concat/vec4; draw_concat_vec4
+    %load/vec4 v0x976c64a00_0;
+    %concat/vec4; draw_concat_vec4
+    %load/vec4 v0x976c64aa0_0;
+    %concat/vec4; draw_concat_vec4
+    %vpi_call 2 41 "$display", "FAIL t=%0t data=%b sel=%b y=%b expected=%b", $time, S<0,vec4,u4>, v0x976c64c80_0, v0x976c64d20_0, v0x976c646e0_0 {1 0 0};
+T_0.7 ;
+    %end;
+S_0x1016460c0 .scope module, "dut" "four_one_mux" 2 12, 3 1 0, S_0x101642c00;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "i0";
+    .port_info 1 /INPUT 1 "i1";
+    .port_info 2 /INPUT 1 "i2";
+    .port_info 3 /INPUT 1 "i3";
+    .port_info 4 /OUTPUT 1 "y";
+    .port_info 5 /INPUT 2 "sel";
+v0x976c641e0_0 .net "i0", 0 0, v0x976c648c0_0;  1 drivers
+v0x976c64280_0 .net "i1", 0 0, v0x976c64960_0;  1 drivers
+v0x976c64320_0 .net "i2", 0 0, v0x976c64a00_0;  1 drivers
+v0x976c643c0_0 .net "i3", 0 0, v0x976c64aa0_0;  1 drivers
+v0x976c64460_0 .net "sel", 1 0, v0x976c64c80_0;  1 drivers
+v0x976c64500_0 .net "w1", 0 0, L_0x101650890;  1 drivers
+v0x976c645a0_0 .net "w2", 0 0, L_0x1016509d0;  1 drivers
+v0x976c64640_0 .net "y", 0 0, L_0x101650a70;  alias, 1 drivers
+L_0x101650930 .part v0x976c64c80_0, 0, 1;
+L_0x977040000 .part v0x976c64c80_0, 0, 1;
+L_0x9770400a0 .part v0x976c64c80_0, 1, 1;
+S_0x101644990 .scope module, "uut1" "two_one_mux" 3 7, 4 1 0, S_0x1016460c0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "i0";
+    .port_info 1 /INPUT 1 "i1";
+    .port_info 2 /OUTPUT 1 "y";
+    .port_info 3 /INPUT 1 "sel";
+v0x101644b70_0 .net "i0", 0 0, v0x976c648c0_0;  alias, 1 drivers
+v0x101644c10_0 .net "i1", 0 0, v0x976c64960_0;  alias, 1 drivers
+v0x10164f520_0 .net "sel", 0 0, L_0x101650930;  1 drivers
+v0x10164f5c0_0 .net "y", 0 0, L_0x101650890;  alias, 1 drivers
+L_0x101650890 .functor MUXZ 1, v0x976c648c0_0, v0x976c64960_0, L_0x101650930, C4<>;
+S_0x10164f660 .scope module, "uut2" "two_one_mux" 3 8, 4 1 0, S_0x1016460c0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "i0";
+    .port_info 1 /INPUT 1 "i1";
+    .port_info 2 /OUTPUT 1 "y";
+    .port_info 3 /INPUT 1 "sel";
+v0x101650340_0 .net "i0", 0 0, v0x976c64a00_0;  alias, 1 drivers
+v0x1016503e0_0 .net "i1", 0 0, v0x976c64aa0_0;  alias, 1 drivers
+v0x101650480_0 .net "sel", 0 0, L_0x977040000;  1 drivers
+v0x101650520_0 .net "y", 0 0, L_0x1016509d0;  alias, 1 drivers
+L_0x1016509d0 .functor MUXZ 1, v0x976c64a00_0, v0x976c64aa0_0, L_0x977040000, C4<>;
+S_0x1016505c0 .scope module, "uut3" "two_one_mux" 3 9, 4 1 0, S_0x1016460c0;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "i0";
+    .port_info 1 /INPUT 1 "i1";
+    .port_info 2 /OUTPUT 1 "y";
+    .port_info 3 /INPUT 1 "sel";
+v0x1016507f0_0 .net "i0", 0 0, L_0x101650890;  alias, 1 drivers
+v0x976c64000_0 .net "i1", 0 0, L_0x1016509d0;  alias, 1 drivers
+v0x976c640a0_0 .net "sel", 0 0, L_0x9770400a0;  1 drivers
+v0x976c64140_0 .net "y", 0 0, L_0x101650a70;  alias, 1 drivers
+L_0x101650a70 .functor MUXZ 1, L_0x101650890, L_0x1016509d0, L_0x9770400a0, C4<>;
+    .scope S_0x101642c00;
+T_1 ;
+    %vpi_call 2 47 "$dumpfile", "four_one_mux_selfcheck.vcd" {0 0 0};
+    %vpi_call 2 48 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x101642c00 {0 0 0};
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x976c64be0_0, 0, 32;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x976c64780_0, 0, 32;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x976c64820_0, 0, 32;
+T_1.0 ;
+    %load/vec4 v0x976c64820_0;
+    %cmpi/s 16, 0, 32;
+    %jmp/0xz T_1.1, 5;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x976c64b40_0, 0, 32;
+T_1.2 ;
+    %load/vec4 v0x976c64b40_0;
+    %cmpi/s 4, 0, 32;
+    %jmp/0xz T_1.3, 5;
+    %load/vec4 v0x976c64820_0;
+    %parti/s 4, 0, 2;
+    %store/vec4 v0x10164e2c0_0, 0, 4;
+    %load/vec4 v0x976c64b40_0;
+    %parti/s 2, 0, 2;
+    %store/vec4 v0x101646020_0, 0, 2;
+    %fork TD_four_one_mux_selfcheck_tb.apply_and_check, S_0x101642d80;
+    %join;
+    %load/vec4 v0x976c64b40_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x976c64b40_0, 0, 32;
+    %jmp T_1.2;
+T_1.3 ;
+    %load/vec4 v0x976c64820_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x976c64820_0, 0, 32;
+    %jmp T_1.0;
+T_1.1 ;
+    %vpi_call 2 59 "$display", "SUMMARY: PASS=%0d FAIL=%0d", v0x976c64be0_0, v0x976c64780_0 {0 0 0};
+    %load/vec4 v0x976c64780_0;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_1.4, 4;
+    %vpi_call 2 61 "$display", "ALL TESTS PASSED" {0 0 0};
+    %jmp T_1.5;
+T_1.4 ;
+    %vpi_call 2 63 "$display", "SOME TESTS FAILED" {0 0 0};
+T_1.5 ;
+    %vpi_call 2 65 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "tb/four_one_mux_selfcheck_tb.v";
+    "RTL/four_one_mux.v";
+    "RTL/two_one_mux.v";
