@@ -1,3 +1,6 @@
 *.vcd
 *.vvp
 *.sim
+*.mpf
+*.wlf
+*.mti
