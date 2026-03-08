@@ -1,25 +1,49 @@
-# Verilog HDL Practice Modules
+# Verilog HDL Modules
 
-This repository contains Verilog HDL modules that I have been practicing from the beginning. It includes basic gates, combinational circuits, and their respective testbenches and simulation files.
+This repository contains my Verilog HDL practice work, including basic gates, combinational circuits, ALU design, and lab assignments with RTL, testbenches, and waveform outputs.
 
-## Contents
+## Repository Structure
 
-### 1. Basic Gates
-This folder contains implementations and testbenches for basic logic gates:
-- **AND Gate**: [1.AND_gate](Basic_gates/1.AND_gate/)
-- **OR Gate**: [2.OR_gate](Basic_gates/2.OR_gate/)
-- **NOT Gate**: [3.NOT_gate](Basic_gates/3.NOT_gate/)
-- **NOR Gate**: [4.NOR_gate](Basic_gates/4.NOR_gate/)
-- **NAND Gate**: [5.NAND_gate](Basic_gates/5.NAND_gate/)
-- **XOR Gate**: [6.XOR_gate](Basic_gates/6.XOR_gate/)
-- **XNOR Gate**: [7.XNOR_gate](Basic_gates/7.XNOR_gate/)
+- `Basic_gates/`
+	- AND, OR, NOT, NOR, NAND, XOR, XNOR implementations and testbenches.
+- `Combinational_Circuits/`
+	- Half Adder, Full Adder, Ripple Carry Adder, Subtractors, and derived designs.
+- `ALU/`
+	- ALU RTL and testbench.
+- `Assignments/lab1/`
+	- Full Adder (dataflow), 2:4 Decoder, Ripple Adder using 1-bit FA, 4:1 MUX, and 4:1 MUX using Decoder + Tri-state buffer.
+- `Xilinx_simulations/`
+	- Xilinx project-oriented simulation setup and files.
 
-### 2. Combinational Circuits
-This folder contains implementations and testbenches for combinational circuits:
-- **Half Adder**: [1.HalfAdder](Combinational_Circuits/1.HalfAdder/)
-- **Full Adder**: [2.FullAdder](Combinational_Circuits/2.FullAdder/)
+## Tools Used
 
-## How to Use
-1. Navigate to the respective folder for the module you want to explore.
-2. Follow the instructions in the `README.md` or `to_cmpile_run.txt` files for compilation and simulation.
-3. Use GTKWave to visualize the waveforms from the `.vcd` files.
+- `iverilog` for compile/elaboration
+- `vvp` for simulation
+- `gtkwave` for waveform viewing (`.vcd` files)
+
+## Quick Run Flow
+
+1. Go to the target module folder.
+2. Compile RTL and testbench:
+
+```bash
+iverilog -o sim.out <rtl_files>.v <testbench>.v
+```
+
+3. Run simulation:
+
+```bash
+vvp sim.out
+```
+
+4. Open waveform:
+
+```bash
+gtkwave <dumpfile>.vcd
+```
+
+## Notes
+
+- Most modules include both RTL and testbench files in nearby `RTL/` and `tb/` folders.
+- Some labs include self-checking testbenches with pass/fail summaries.
+- File and folder names are kept lab-wise for easy tracking of learning progress.
