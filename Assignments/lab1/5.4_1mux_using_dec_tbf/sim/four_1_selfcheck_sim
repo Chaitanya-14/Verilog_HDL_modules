@@ -1,0 +1,237 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x1030e6c00 .scope module, "four_1_tb_selfchecking" "four_1_tb_selfchecking" 2 2;
+ .timescale -9 -12;
+v0xb6ec65220_0 .var "expected_y", 0 0;
+v0xb6ec652c0_0 .var/i "fail_count", 31 0;
+v0xb6ec65360_0 .var "i", 3 0;
+v0xb6ec65400_0 .var/i "j", 31 0;
+v0xb6ec654a0_0 .var/i "pass_count", 31 0;
+v0xb6ec65540_0 .var "sel", 1 0;
+v0xb6ec655e0_0 .var/i "vec", 31 0;
+RS_0xb6e820100 .resolv tri, L_0xb6f0483c0, L_0xb6f048460, L_0xb6f048500, L_0xb6f0485a0;
+v0xb6ec65680_0 .net8 "y", 0 0, RS_0xb6e820100;  4 drivers
+S_0x1030e6d80 .scope task, "apply_stimulus_and_check" "apply_stimulus_and_check" 2 13, 2 13 0, S_0x1030e6c00;
+ .timescale -9 -12;
+v0x1030f4f00_0 .var "ta", 3 0;
+v0x1030f4a70_0 .var "ts", 1 0;
+TD_four_1_tb_selfchecking.apply_stimulus_and_check ;
+    %load/vec4 v0x1030f4f00_0;
+    %store/vec4 v0xb6ec65360_0, 0, 4;
+    %load/vec4 v0x1030f4a70_0;
+    %store/vec4 v0xb6ec65540_0, 0, 2;
+    %load/vec4 v0x1030f4a70_0;
+    %dup/vec4;
+    %pushi/vec4 0, 0, 2;
+    %cmp/u;
+    %jmp/1 T_0.0, 6;
+    %dup/vec4;
+    %pushi/vec4 1, 0, 2;
+    %cmp/u;
+    %jmp/1 T_0.1, 6;
+    %dup/vec4;
+    %pushi/vec4 2, 0, 2;
+    %cmp/u;
+    %jmp/1 T_0.2, 6;
+    %dup/vec4;
+    %pushi/vec4 3, 0, 2;
+    %cmp/u;
+    %jmp/1 T_0.3, 6;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0xb6ec65220_0, 0, 1;
+    %jmp T_0.5;
+T_0.0 ;
+    %load/vec4 v0x1030f4f00_0;
+    %parti/s 1, 0, 2;
+    %store/vec4 v0xb6ec65220_0, 0, 1;
+    %jmp T_0.5;
+T_0.1 ;
+    %load/vec4 v0x1030f4f00_0;
+    %parti/s 1, 1, 2;
+    %store/vec4 v0xb6ec65220_0, 0, 1;
+    %jmp T_0.5;
+T_0.2 ;
+    %load/vec4 v0x1030f4f00_0;
+    %parti/s 1, 2, 3;
+    %store/vec4 v0xb6ec65220_0, 0, 1;
+    %jmp T_0.5;
+T_0.3 ;
+    %load/vec4 v0x1030f4f00_0;
+    %parti/s 1, 3, 3;
+    %store/vec4 v0xb6ec65220_0, 0, 1;
+    %jmp T_0.5;
+T_0.5 ;
+    %pop/vec4 1;
+    %delay 10000, 0;
+    %load/vec4 v0xb6ec65680_0;
+    %load/vec4 v0xb6ec65220_0;
+    %cmp/e;
+    %jmp/0xz  T_0.6, 6;
+    %load/vec4 v0xb6ec654a0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0xb6ec654a0_0, 0, 32;
+    %jmp T_0.7;
+T_0.6 ;
+    %load/vec4 v0xb6ec652c0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0xb6ec652c0_0, 0, 32;
+    %vpi_call 2 36 "$display", "FAIL Time= %0t i=%b sel=%b y=%b expected=%b", $time, v0xb6ec65360_0, v0xb6ec65540_0, v0xb6ec65680_0, v0xb6ec65220_0 {0 0 0};
+T_0.7 ;
+    %end;
+S_0x1030e8a50 .scope module, "uut1" "four_1_mux" 2 11, 3 1 0, S_0x1030e6c00;
+ .timescale 0 0;
+    .port_info 0 /INPUT 4 "i";
+    .port_info 1 /INPUT 2 "sel";
+    .port_info 2 /OUTPUT 1 "y";
+v0xb6ec64fa0_0 .net "i", 3 0, v0xb6ec65360_0;  1 drivers
+v0xb6ec65040_0 .net "m", 3 0, L_0xb6f048320;  1 drivers
+v0xb6ec650e0_0 .net "sel", 1 0, v0xb6ec65540_0;  1 drivers
+v0xb6ec65180_0 .net8 "y", 0 0, RS_0xb6e820100;  alias, 4 drivers
+L_0xb6f03c280 .part L_0xb6f048320, 0, 1;
+L_0xb6f03c140 .part v0xb6ec65360_0, 0, 1;
+L_0xb6f03c000 .part L_0xb6f048320, 1, 1;
+L_0xb6f03c3c0 .part v0xb6ec65360_0, 1, 1;
+L_0xb6f03c460 .part L_0xb6f048320, 2, 1;
+L_0xb6f03c500 .part v0xb6ec65360_0, 2, 1;
+L_0xb6f03c5a0 .part L_0xb6f048320, 3, 1;
+L_0xb6f03c640 .part v0xb6ec65360_0, 3, 1;
+S_0x1030e8bd0 .scope module, "uut0" "tristate_buf" 3 9, 4 1 0, S_0x1030e8a50;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "c";
+    .port_info 1 /INPUT 1 "x";
+    .port_info 2 /OUTPUT 1 "y";
+o0xb6e820070 .functor BUFZ 1, C4<z>; HiZ drive
+; Elide local net with no drivers, v0x1030f5a70_0 name=_ivl_0
+v0x1030f58b0_0 .net "c", 0 0, L_0xb6f03c280;  1 drivers
+v0x1030f56c0_0 .net "x", 0 0, L_0xb6f03c140;  1 drivers
+v0x1030f47f0_0 .net8 "y", 0 0, RS_0xb6e820100;  alias, 4 drivers
+L_0xb6f0483c0 .functor MUXZ 1, o0xb6e820070, L_0xb6f03c140, L_0xb6f03c280, C4<>;
+S_0x1030ea970 .scope module, "uut1" "tristate_buf" 3 10, 4 1 0, S_0x1030e8a50;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "c";
+    .port_info 1 /INPUT 1 "x";
+    .port_info 2 /OUTPUT 1 "y";
+o0xb6e8201c0 .functor BUFZ 1, C4<z>; HiZ drive
+; Elide local net with no drivers, v0x1030f7070_0 name=_ivl_0
+v0xb6ec64000_0 .net "c", 0 0, L_0xb6f03c000;  1 drivers
+v0xb6ec640a0_0 .net "x", 0 0, L_0xb6f03c3c0;  1 drivers
+v0xb6ec64140_0 .net8 "y", 0 0, RS_0xb6e820100;  alias, 4 drivers
+L_0xb6f048460 .functor MUXZ 1, o0xb6e8201c0, L_0xb6f03c3c0, L_0xb6f03c000, C4<>;
+S_0x1030eaaf0 .scope module, "uut2" "tristate_buf" 3 11, 4 1 0, S_0x1030e8a50;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "c";
+    .port_info 1 /INPUT 1 "x";
+    .port_info 2 /OUTPUT 1 "y";
+o0xb6e8202e0 .functor BUFZ 1, C4<z>; HiZ drive
+; Elide local net with no drivers, v0xb6ec641e0_0 name=_ivl_0
+v0xb6ec64280_0 .net "c", 0 0, L_0xb6f03c460;  1 drivers
+v0xb6ec64320_0 .net "x", 0 0, L_0xb6f03c500;  1 drivers
+v0xb6ec643c0_0 .net8 "y", 0 0, RS_0xb6e820100;  alias, 4 drivers
+L_0xb6f048500 .functor MUXZ 1, o0xb6e8202e0, L_0xb6f03c500, L_0xb6f03c460, C4<>;
+S_0x1030e95f0 .scope module, "uut3" "tristate_buf" 3 12, 4 1 0, S_0x1030e8a50;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "c";
+    .port_info 1 /INPUT 1 "x";
+    .port_info 2 /OUTPUT 1 "y";
+o0xb6e820400 .functor BUFZ 1, C4<z>; HiZ drive
+; Elide local net with no drivers, v0xb6ec64460_0 name=_ivl_0
+v0xb6ec64500_0 .net "c", 0 0, L_0xb6f03c5a0;  1 drivers
+v0xb6ec645a0_0 .net "x", 0 0, L_0xb6f03c640;  1 drivers
+v0xb6ec64640_0 .net8 "y", 0 0, RS_0xb6e820100;  alias, 4 drivers
+L_0xb6f0485a0 .functor MUXZ 1, o0xb6e820400, L_0xb6f03c640, L_0xb6f03c5a0, C4<>;
+S_0x1030e9770 .scope module, "uut_dec" "two_4_decoder" 3 7, 5 1 0, S_0x1030e8a50;
+ .timescale 0 0;
+    .port_info 0 /INPUT 2 "s";
+    .port_info 1 /OUTPUT 4 "m";
+L_0xb6e854010 .functor BUFT 1, C4<00>, C4<0>, C4<0>, C4<0>;
+v0xb6ec646e0_0 .net/2u *"_ivl_0", 1 0, L_0xb6e854010;  1 drivers
+L_0xb6e8540e8 .functor BUFT 1, C4<0010>, C4<0>, C4<0>, C4<0>;
+v0xb6ec64780_0 .net/2u *"_ivl_10", 3 0, L_0xb6e8540e8;  1 drivers
+L_0xb6e854130 .functor BUFT 1, C4<10>, C4<0>, C4<0>, C4<0>;
+v0xb6ec64820_0 .net/2u *"_ivl_12", 1 0, L_0xb6e854130;  1 drivers
+v0xb6ec648c0_0 .net *"_ivl_14", 0 0, L_0x1030f6af0;  1 drivers
+L_0xb6e854178 .functor BUFT 1, C4<0100>, C4<0>, C4<0>, C4<0>;
+v0xb6ec64960_0 .net/2u *"_ivl_16", 3 0, L_0xb6e854178;  1 drivers
+L_0xb6e8541c0 .functor BUFT 1, C4<1000>, C4<0>, C4<0>, C4<0>;
+v0xb6ec64a00_0 .net/2u *"_ivl_18", 3 0, L_0xb6e8541c0;  1 drivers
+v0xb6ec64aa0_0 .net *"_ivl_2", 0 0, L_0x1030f69b0;  1 drivers
+v0xb6ec64b40_0 .net *"_ivl_20", 3 0, L_0xb6f0481e0;  1 drivers
+v0xb6ec64be0_0 .net *"_ivl_22", 3 0, L_0xb6f048280;  1 drivers
+L_0xb6e854058 .functor BUFT 1, C4<0001>, C4<0>, C4<0>, C4<0>;
+v0xb6ec64c80_0 .net/2u *"_ivl_4", 3 0, L_0xb6e854058;  1 drivers
+L_0xb6e8540a0 .functor BUFT 1, C4<01>, C4<0>, C4<0>, C4<0>;
+v0xb6ec64d20_0 .net/2u *"_ivl_6", 1 0, L_0xb6e8540a0;  1 drivers
+v0xb6ec64dc0_0 .net *"_ivl_8", 0 0, L_0x1030f6a50;  1 drivers
+v0xb6ec64e60_0 .net "m", 3 0, L_0xb6f048320;  alias, 1 drivers
+v0xb6ec64f00_0 .net "s", 1 0, v0xb6ec65540_0;  alias, 1 drivers
+L_0x1030f69b0 .cmp/eq 2, v0xb6ec65540_0, L_0xb6e854010;
+L_0x1030f6a50 .cmp/eq 2, v0xb6ec65540_0, L_0xb6e8540a0;
+L_0x1030f6af0 .cmp/eq 2, v0xb6ec65540_0, L_0xb6e854130;
+L_0xb6f0481e0 .functor MUXZ 4, L_0xb6e8541c0, L_0xb6e854178, L_0x1030f6af0, C4<>;
+L_0xb6f048280 .functor MUXZ 4, L_0xb6f0481e0, L_0xb6e8540e8, L_0x1030f6a50, C4<>;
+L_0xb6f048320 .functor MUXZ 4, L_0xb6f048280, L_0xb6e854058, L_0x1030f69b0, C4<>;
+    .scope S_0x1030e6c00;
+T_1 ;
+    %vpi_call 2 43 "$dumpfile", "four_1_tb_selfchecking.vcd" {0 0 0};
+    %vpi_call 2 44 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x1030e6c00 {0 0 0};
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0xb6ec654a0_0, 0, 32;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0xb6ec652c0_0, 0, 32;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0xb6ec655e0_0, 0, 32;
+T_1.0 ;
+    %load/vec4 v0xb6ec655e0_0;
+    %cmpi/s 16, 0, 32;
+    %jmp/0xz T_1.1, 5;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0xb6ec65400_0, 0, 32;
+T_1.2 ;
+    %load/vec4 v0xb6ec65400_0;
+    %cmpi/s 4, 0, 32;
+    %jmp/0xz T_1.3, 5;
+    %load/vec4 v0xb6ec655e0_0;
+    %parti/s 4, 0, 2;
+    %store/vec4 v0x1030f4f00_0, 0, 4;
+    %load/vec4 v0xb6ec65400_0;
+    %parti/s 2, 0, 2;
+    %store/vec4 v0x1030f4a70_0, 0, 2;
+    %fork TD_four_1_tb_selfchecking.apply_stimulus_and_check, S_0x1030e6d80;
+    %join;
+    %load/vec4 v0xb6ec65400_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0xb6ec65400_0, 0, 32;
+    %jmp T_1.2;
+T_1.3 ;
+    %load/vec4 v0xb6ec655e0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0xb6ec655e0_0, 0, 32;
+    %jmp T_1.0;
+T_1.1 ;
+    %vpi_call 2 57 "$display", "SUMMARY: PASS=%0d FAIL=%0d", v0xb6ec654a0_0, v0xb6ec652c0_0 {0 0 0};
+    %load/vec4 v0xb6ec652c0_0;
+    %cmpi/e 0, 0, 32;
+    %jmp/0xz  T_1.4, 4;
+    %vpi_call 2 59 "$display", "All tests PASSED!!!" {0 0 0};
+    %jmp T_1.5;
+T_1.4 ;
+    %vpi_call 2 61 "$display", "Some tests are FAILED" {0 0 0};
+T_1.5 ;
+    %vpi_call 2 65 "$finish" {0 0 0};
+    %end;
+    .thread T_1;
+# The file index is used to find the file name in the following table.
+:file_names 6;
+    "N/A";
+    "<interactive>";
+    "tb/four_1_tb_selfchecking.v";
+    "RTL/four_1_mux.v";
+    "RTL/tristate_buf.v";
+    "RTL/two_4_decoder.v";
