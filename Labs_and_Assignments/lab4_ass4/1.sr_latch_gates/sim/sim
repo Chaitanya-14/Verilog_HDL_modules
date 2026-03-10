@@ -1,0 +1,120 @@
+#! /opt/homebrew/Cellar/icarus-verilog/12.0/bin/vvp
+:ivl_version "12.0 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 12;
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/system.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_sys.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/vhdl_textio.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/v2005_math.vpi";
+:vpi_module "/opt/homebrew/Cellar/icarus-verilog/12.0/lib/ivl/va_math.vpi";
+S_0x101895560 .scope module, "sr_latch_tb" "sr_latch_tb" 2 2;
+ .timescale -9 -12;
+v0x8750101e0_0 .var/i "i", 31 0;
+v0x875010280_0 .var/i "j", 31 0;
+v0x875010320_0 .net "q", 0 0, L_0x10189eec0;  1 drivers
+v0x8750103c0_0 .net "qbar", 0 0, L_0x10189f020;  1 drivers
+v0x875010460_0 .var "r", 0 0;
+v0x875010500_0 .var "s", 0 0;
+S_0x1018956e0 .scope task, "initialise" "initialise" 2 9, 2 9 0, S_0x101895560;
+ .timescale -9 -12;
+TD_sr_latch_tb.initialise ;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x875010500_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x875010460_0, 0, 1;
+    %end;
+S_0x1018942d0 .scope task, "stimulus" "stimulus" 2 17, 2 17 0, S_0x101895560;
+ .timescale -9 -12;
+v0x101894450_0 .var "tr", 0 0;
+v0x1018944f0_0 .var "ts", 0 0;
+TD_sr_latch_tb.stimulus ;
+    %load/vec4 v0x1018944f0_0;
+    %store/vec4 v0x875010500_0, 0, 1;
+    %load/vec4 v0x101894450_0;
+    %store/vec4 v0x875010460_0, 0, 1;
+    %delay 10000, 0;
+    %end;
+S_0x101896120 .scope module, "uut" "sr_latch" 2 7, 3 1 0, S_0x101895560;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "set";
+    .port_info 1 /INPUT 1 "reset";
+    .port_info 2 /OUTPUT 1 "q_out";
+    .port_info 3 /OUTPUT 1 "qbar";
+v0x10189ed30_0 .net "q_out", 0 0, L_0x10189eec0;  alias, 1 drivers
+v0x875010000_0 .net "qbar", 0 0, L_0x10189f020;  alias, 1 drivers
+v0x8750100a0_0 .net "reset", 0 0, v0x875010460_0;  1 drivers
+v0x875010140_0 .net "set", 0 0, v0x875010500_0;  1 drivers
+S_0x1018962a0 .scope module, "uut1" "srnand" 3 6, 4 1 0, S_0x101896120;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /OUTPUT 1 "y";
+L_0x10189edd0 .functor AND 1, v0x875010500_0, L_0x10189f020, C4<1>, C4<1>;
+L_0x10189eec0 .functor NOT 1, L_0x10189edd0, C4<0>, C4<0>, C4<0>;
+v0x10189e610_0 .net *"_ivl_0", 0 0, L_0x10189edd0;  1 drivers
+v0x10189e6b0_0 .net "a", 0 0, v0x875010500_0;  alias, 1 drivers
+v0x10189e750_0 .net "b", 0 0, L_0x10189f020;  alias, 1 drivers
+v0x10189e7f0_0 .net "y", 0 0, L_0x10189eec0;  alias, 1 drivers
+S_0x10189e890 .scope module, "uut2" "srnand" 3 7, 4 1 0, S_0x101896120;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "a";
+    .port_info 1 /INPUT 1 "b";
+    .port_info 2 /OUTPUT 1 "y";
+L_0x10189efb0 .functor AND 1, L_0x10189eec0, v0x875010460_0, C4<1>, C4<1>;
+L_0x10189f020 .functor NOT 1, L_0x10189efb0, C4<0>, C4<0>, C4<0>;
+v0x10189eab0_0 .net *"_ivl_0", 0 0, L_0x10189efb0;  1 drivers
+v0x10189eb50_0 .net "a", 0 0, L_0x10189eec0;  alias, 1 drivers
+v0x10189ebf0_0 .net "b", 0 0, v0x875010460_0;  alias, 1 drivers
+v0x10189ec90_0 .net "y", 0 0, L_0x10189f020;  alias, 1 drivers
+    .scope S_0x101895560;
+T_2 ;
+    %vpi_call 2 29 "$dumpfile", "sr_latch.vcd" {0 0 0};
+    %vpi_call 2 30 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x101895560 {0 0 0};
+    %fork TD_sr_latch_tb.initialise, S_0x1018956e0;
+    %join;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x8750101e0_0, 0, 32;
+T_2.0 ;
+    %load/vec4 v0x8750101e0_0;
+    %cmpi/s 2, 0, 32;
+    %jmp/0xz T_2.1, 5;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0x875010280_0, 0, 32;
+T_2.2 ;
+    %load/vec4 v0x875010280_0;
+    %cmpi/s 2, 0, 32;
+    %jmp/0xz T_2.3, 5;
+    %load/vec4 v0x8750101e0_0;
+    %pad/s 1;
+    %store/vec4 v0x1018944f0_0, 0, 1;
+    %load/vec4 v0x875010280_0;
+    %pad/s 1;
+    %store/vec4 v0x101894450_0, 0, 1;
+    %fork TD_sr_latch_tb.stimulus, S_0x1018942d0;
+    %join;
+    %load/vec4 v0x875010280_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x875010280_0, 0, 32;
+    %jmp T_2.2;
+T_2.3 ;
+    %load/vec4 v0x8750101e0_0;
+    %addi 1, 0, 32;
+    %store/vec4 v0x8750101e0_0, 0, 32;
+    %jmp T_2.0;
+T_2.1 ;
+    %end;
+    .thread T_2;
+    .scope S_0x101895560;
+T_3 ;
+    %vpi_call 2 44 "$monitor", "Time=%0t s=%b r=%b q=%b qbar=%b", $time, v0x875010500_0, v0x875010460_0, v0x875010320_0, v0x8750103c0_0 {0 0 0};
+    %delay 100000, 0;
+    %vpi_call 2 45 "$finish" {0 0 0};
+    %end;
+    .thread T_3;
+# The file index is used to find the file name in the following table.
+:file_names 5;
+    "N/A";
+    "<interactive>";
+    "sr_latch_tb.v";
+    "../RTL/sr_latch.v";
+    "../RTL/srnand.v";
