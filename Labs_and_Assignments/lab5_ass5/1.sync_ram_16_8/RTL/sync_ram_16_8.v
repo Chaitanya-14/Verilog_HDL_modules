@@ -16,11 +16,11 @@ module sync_ram_16_8 (clk,rst,wr_en,wr_addr,rd_en,rd_addr,data_in,data_out);
                     mem[i] = 8'b00000000;
                 end
             end
-            else if (wr_en)
+            else if (wr_en && !rd_en)
                 begin
                     mem[wr_addr] = data_in;
                 end
-            else if (rd_en)
+            else if (rd_en && wr_en)
                 begin
                     data_out = mem[rd_addr];
                 end
