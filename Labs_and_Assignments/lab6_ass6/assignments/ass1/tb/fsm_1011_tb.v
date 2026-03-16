@@ -15,8 +15,9 @@ module fsm_1011_tb;
         end
     endtask
     
-    initial 
-    clk = 1'b0;
+    initial begin
+        clk = 1'b0;
+    end
     always #(CYCLE/2) clk = ~clk;
 
     task initialize;
@@ -36,7 +37,9 @@ module fsm_1011_tb;
     task stimulus;
         input t;
             begin
+                @(posedge clk);
                 seq_in = t;
+                delay(1);                
             end
     endtask
 
@@ -44,12 +47,12 @@ module fsm_1011_tb;
         begin
             $dumpfile("fsm_1011.vcd");
             $dumpvars(0,fsm_1011_tb);
-            $monitor("Time = %0t rst=%b seq_in =%b state=%b next output = %b", $time, rst,seq_in,uut.present_state,d_out);
+            $monitor("Time = %0t rst=%b seq_in =%b state=%b output = %b", $time, rst,seq_in,uut.present_state,d_out);
         end
 
-        always (uut.present_state , d_out)
+        always@(uut.present_state or d_out)
             begin
-                if (uu.present_state = 2'b11 && d_out == 1)
+                if (uut.present_state == 2'b11 && d_out == 1)
                     $display ("correct output at state %b", uut.present_state );
             end
 
