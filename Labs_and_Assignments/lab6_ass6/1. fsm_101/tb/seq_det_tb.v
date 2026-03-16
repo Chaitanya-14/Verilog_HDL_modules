@@ -65,7 +65,7 @@ module seq_det_tb;
 
 								
    /*Process to display a string after the sequence is detected and dout is asserted.
-   SQD.state is used here as a path hierarchy where SQD is the instance name acting
+   SQD.preset_state is used here as a path hierarchy where SQD is the instance name acting
    like a handle to access the internal register "state" */
    always@(SQD.present_state or dout)
       begin
