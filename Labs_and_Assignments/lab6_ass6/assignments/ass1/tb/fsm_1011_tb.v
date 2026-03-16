@@ -47,6 +47,35 @@ module fsm_1011_tb;
             $monitor("Time = %0t rst=%b seq_in =%b state=%b next output = %b", $time, rst,seq_in,uut.present_state,d_out);
         end
 
+        always (uut.present_state , d_out)
+            begin
+                if (uu.present_state = 2'b11 && d_out == 1)
+                    $display ("correct output at state %b", uut.present_state );
+            end
+
+
     initial
         begin
-            
+            initialize;
+            rst_dut;
+            stimulus(1);
+            stimulus(0);
+            stimulus(1);
+            stimulus(1);
+            stimulus(0);
+            stimulus(1);
+            rst_dut;
+            stimulus(1);
+            stimulus(0);
+            stimulus(1);
+            stimulus(1);
+            stimulus(0);
+            stimulus(1);
+            stimulus(1);
+            stimulus(1);
+            delay(10);    
+            $finish;
+
+        end
+
+endmodule
