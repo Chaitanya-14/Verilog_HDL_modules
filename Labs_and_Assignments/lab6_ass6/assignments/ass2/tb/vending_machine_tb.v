@@ -63,10 +63,13 @@ module vending_machine_tb;
             initialise;
             delay (5);
             rst_dut;
-            stimulus (1,0); // S0 -> S1
-            stimulus (1,0); // S1 -> S1
-            stimulus (1,1); // S1 -> S0 (dispense)
-            delay (10);
+            $display(" Dropping 1 Rs Coin ");
+            stimulus (1,0); 
+            $display("Dropping another 1 Rs Coin");
+            stimulus (1,0); 
+            $display("--- Dropping 2 Rs Coin ---");
+            stimulus (1,1); 
+            delay (50);
             $finish;
         
         
