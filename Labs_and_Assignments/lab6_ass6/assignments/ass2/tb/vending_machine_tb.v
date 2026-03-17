@@ -7,12 +7,13 @@ module vending_machine_tb;
     
     parameter CYCLE = 10;
 
-    initial
-    clk = 1'b0;
+    initial begin
+        clk = 1'b0;
+    end
     always #(CYCLE /2) clk = ~clk;
     
     task delay;
-        input k;
+        input integer k;
         begin
             #k;
         end
@@ -23,7 +24,7 @@ module vending_machine_tb;
             rst = 1'b0;
             in1 = 1'b0;
             in2 = 1'b0;
-            dealy(1);
+            delay(1);
         end
     endtask
 
@@ -42,10 +43,34 @@ module vending_machine_tb;
         begin
             @(posedge clk);
             in1 = tin1;
-            #1
             in2 = tin2;
-            #1
+            @(posedge clk);
+
+            in1 = 1'b0;
+            in2 = 1'b0;
         end
     endtask
 
-    
+    initial
+        begin
+            $monitor("$Time = %0t | coin1= %b | coin 2 =%b | x_out = %b | y_out = %b", $time, in1 , in2 , x_out, y_out);
+            $dumpfile("vending_machine.vcd");
+            $dumpvars(0,vending_machine_tb);
+        end
+
+    initial
+        begin
+            initialise;
+            delay (5);
+            rst_dut;
+            stimulus (1,0); // S0 -> S1
+            stimulus (1,0); // S1 -> S1
+            stimulus (1,1); // S1 -> S0 (dispense)
+            delay (10);
+            $finish;
+        
+        
+        
+        end
+endmodule
+
