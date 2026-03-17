@@ -19,9 +19,6 @@ module vending_machine(clk,rst,co_in0,co_in1,x_out,y_out);
 
     // Next state combinational logic
     always @ (present_state,co_in0,co_in1)
-        next_state = S0;
-        x_out = 1'b0;
-        y_out = 1'b0;
         begin
             case(present_state)
                 S0 : if (co_in0 == 1'b0) begin
