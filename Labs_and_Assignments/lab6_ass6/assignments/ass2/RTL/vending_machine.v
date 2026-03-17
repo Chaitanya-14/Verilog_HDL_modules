@@ -60,7 +60,11 @@ module vending_machine(clk,rst,co_in0,co_in1,x_out,y_out);
                         next_state = S0;
                         x_out = 1 ; y_out = 1;
                     end
-
+                default : begin
+                        next_state = S0;
+                        x_out = 1'b0;
+                        y_out = 1'b0;
+                end
             endcase
         end
 
