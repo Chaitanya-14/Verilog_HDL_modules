@@ -18,7 +18,7 @@ module half_sub_tb ;
         input j;
         begin
             a = i;
-            j = j;
+            b = j;
             #5;
         end
     endtask
