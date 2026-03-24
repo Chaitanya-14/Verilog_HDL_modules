@@ -63,42 +63,45 @@ module router_fifo #(parameter WIDTH = 8, DEPTH = 16)
             if (!resetn)
                 begin
                     rd_ptr <= 0;
-                    data_out <= 0;
-                end            
-             else if (read_enb && !empty)
-                begin
-                    data_out <= mem[rd_ptr];
-                    rd_ptr <= rd_ptr - 1'b1;
+                    data_out <= 8'h00;
                 end
-            
+            else if (soft_resest)
+                begin
+                    rd_ptr <= 0;
+                    data_out <= 8'hzz;
+                end            
+             else 
+                begin
+                    if (read_enb && !empty)
+                        rd_ptr <= rd_ptr + 1'b1;
+
+                    if ((count == 0) && (data_out != 0))
+                        data_out <= 8'hzz;
+                    else if (read_enb && !empty)
+                        begin
+                            data_out <= mem[rd_ptr[3:0]];
+                        end
+                end                          
         end
 
-    // count operation
+    // FIFO down counter logic
     always @ (posedge clock)
         begin
             if (resetn)
                 begin
-                    count <= 5'b00000;
+                    count <= 0;
                 end
-            else 
+            else if (soft_reset)
                 begin
-                    case ({write_enb && !full,read_enb && !empty})
-                        2'b10 : count <= count + 1'b1;
-                        2'b01 : count <= count - 1'b1;
-                        2'b11 : count <= count;
-                        default : count <= count;
-                    endcase                      
+                    count <= 0;
+                end
+            else if (read_enb & !empty)   
+                begin
+                    if (mem[rd_ptr[3:0]][8] == 1'b1)
+                        count <= mem[rd_ptr[3:0]] [7:2] + 1'b1;
+                    else if (count != 0)
+                        count <= count - 1'b1;                     
                 end
         end
-
-
-
-    
-
-
-
-
-
-
-
+        
 endmodule
