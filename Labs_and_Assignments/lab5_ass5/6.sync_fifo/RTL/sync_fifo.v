@@ -40,6 +40,7 @@ module sync_fifo(clk,rst,write_en,read_en,data_in,data_out,full,empty,almost_ful
                 end
         end
 
+    // count operation
     always @ (posedge clk) begin
         if (rst) 
         begin
