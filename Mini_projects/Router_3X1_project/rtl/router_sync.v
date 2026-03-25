@@ -1,4 +1,4 @@
-module router_sync # (parameter FIFO1 = 3'b001  FIFO2 = 3'b010  FIFO3 = 3'b100 )
+module router_sync # (parameter FIFO1 = 3'b001, FIFO2 = 3'b010, FIFO3 = 3'b100 )
                     (input clock,
                     input resetn,
                     input detect_addr,
@@ -13,17 +13,18 @@ module router_sync # (parameter FIFO1 = 3'b001  FIFO2 = 3'b010  FIFO3 = 3'b100 )
                     input full_0,
                     input full_1,
                     input full_2,
-                    output [2:0] write_enb,
+                    output reg [2:0] write_enb,
                     output fifo_full,
                     output valid_out_0,
                     output valid_out_1,
                     output valid_out_2,
                     output reg soft_reset_0,
                     output reg soft_reset_1,
-                    output reg soft_reset_2, );
+                    output reg soft_reset_2 );
 
 // internal register
 reg [1:0] addr;
+reg [2:0] write_enb;
 reg [4:0] count_read_0;
 reg [4:0] count_read_1;
 reg [4:0] count_read_2;
@@ -40,14 +41,14 @@ always @ (posedge clock)
 always @ (*)
     begin
         if (~write_enb_reg) // comes from FSM if it is low, then don't write to any FIFO, 
-            write_enb = 0;
+            write_enb = 3'b000;
         else 
             begin
                 case(addr)
                     2'b00 : write_enb = FIFO1;
                     2'b01 : write_enb = FIFO2;
                     2'b10 : write_enb = FIFO3;
-                    default : write_enb = 0; // if the address is 2'b11
+                    default : write_enb = 3'b000; // if the address is 2'b11
                 endcase
             end
     end
@@ -93,9 +94,9 @@ always @ (posedge clock)
 
 // soft reset logic 1
 
-always @ (*)
+always @ (posedge clock)
     begin
-        if (resetn)
+        if (~resetn)
             begin
                 count_read_1 <= 0;
                 soft_reset_1 <= 0;
@@ -127,9 +128,9 @@ always @ (*)
     end
 
  // soft reset logic 2   
-always @ (*)
+always @ (posedge clock)
     begin
-        if (resetn)
+        if (~resetn)
             begin
                 count_read_2 <= 0;
                 soft_reset_2 <= 0;
@@ -163,12 +164,12 @@ always @ (*)
 always @ (*)
     begin
         case (addr)
-        begin
+        
             2'b00 :  fifo_full = full_0;
             2'b01 :  fifo_full = full_1;
             2'b10 :  fifo_full = full_2;
             default: fifo_full = 1'b0;
-        end
+        
         endcase
     end
 
