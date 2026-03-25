@@ -160,6 +160,17 @@ always @ (*)
 
     end
 
+always @ (*)
+    begin
+        case (addr)
+        begin
+            2'b00 :  fifo_full = full_0;
+            2'b01 :  fifo_full = full_1;
+            2'b10 :  fifo_full = full_2;
+            default: fifo_full = 1'b0;
+        end
+        endcase
+    end
 
 
 
