@@ -6,6 +6,7 @@ module sync_fifo(clk,rst,write_en,read_en,data_in,data_out,full,empty,almost_ful
     output full,empty,almost_full,almost_empty;
 
     reg [15:0] mem [31:0];
+    
 
     reg [4:0] wr_ptr; // to point towards 32 wr address locations
     reg [4:0] rd_ptr; // to point to 32 rd address locations

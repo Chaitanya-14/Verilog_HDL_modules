@@ -8,7 +8,7 @@ module router_fifo #(parameter WIDTH = 8, DEPTH = 16)
                     input lfd_state,
                     output empty,
                     output full,
-                    output reg [(DEPTH-1):0]data_out);
+                    output reg [8:0] data_out);
 
     // internal variables
     reg [4:0] wr_ptr;
@@ -32,7 +32,7 @@ module router_fifo #(parameter WIDTH = 8, DEPTH = 16)
         begin
             if (!resetn)
                 begin
-                    wr_ptr <= 4'b0000;
+                    wr_ptr <= 5'b00000;
                     for (i=0;i<DEPTH;i=i+1)
                         begin
                             mem[i] <= 0;
@@ -41,7 +41,7 @@ module router_fifo #(parameter WIDTH = 8, DEPTH = 16)
             else if (soft_reset)
                 begin
                     wr_ptr <= 0;
-                    for (i=0 ; i<16 ; i=i+1)
+                    for (i=0 ; i<DEPTH ; i=i+1)
                         begin
                             mem[i] <= 0;
                         end
@@ -65,7 +65,7 @@ module router_fifo #(parameter WIDTH = 8, DEPTH = 16)
                     rd_ptr <= 0;
                     data_out <= 8'h00;
                 end
-            else if (soft_resest)
+            else if (soft_reset)
                 begin
                     rd_ptr <= 0;
                     data_out <= 8'hzz;
@@ -87,7 +87,7 @@ module router_fifo #(parameter WIDTH = 8, DEPTH = 16)
     // FIFO down counter logic
     always @ (posedge clock)
         begin
-            if (resetn)
+            if (!resetn)
                 begin
                     count <= 0;
                 end
@@ -95,7 +95,7 @@ module router_fifo #(parameter WIDTH = 8, DEPTH = 16)
                 begin
                     count <= 0;
                 end
-            else if (read_enb & !empty)   
+              else if (read_enb && !empty)   
                 begin
                     if (mem[rd_ptr[3:0]][8] == 1'b1)
                         count <= mem[rd_ptr[3:0]] [7:2] + 1'b1;
@@ -103,5 +103,5 @@ module router_fifo #(parameter WIDTH = 8, DEPTH = 16)
                         count <= count - 1'b1;                     
                 end
         end
-        
+
 endmodule
