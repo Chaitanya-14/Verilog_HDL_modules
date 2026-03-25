@@ -74,7 +74,7 @@ always @ (posedge clock)
         else if (read_enb_0) // read is enabled and counter need to be initialised to zero, need not to be counting forward
             begin
                 count_read_0 <=0;
-                soft_reset <= 0;
+                soft_reset_0 <= 0;
             end
         else // no reading happening, or valid out might be high
             begin
@@ -86,7 +86,7 @@ always @ (posedge clock)
                 else 
                     begin
                         count_read_0 <= count_read_0 +  1;
-                        soft_reset <= 0; 
+                        soft_reset_0 <= 0; 
                     end
             end
     end
@@ -98,62 +98,62 @@ always @ (*)
         if (resetn)
             begin
                 count_read_1 <= 0;
-                soft_reset <= 0;
+                soft_reset_1 <= 0;
             end
         else if (~valid_out_1)
             begin
                 count_read_1 <= 0;
-                soft_reset <= 0;
+                soft_reset_1 <= 0;
             end
         else if (read_enb_1)
             begin
-                count_read_2 <= 0;
-                soft_reset <= 0;
+                count_read_1 <= 0;
+                soft_reset_1 <= 0;
             end
         else begin
             if (count_read_1 == 29)
                 begin
                     count_read_1 <=0;
-                    soft_reset <=1;
+                    soft_reset_1 <=1;
                 end
                 else 
                     begin
                         count_read_1 <= count_read_1 + 1;
-                        soft_reset <= 0;
+                        soft_reset_1 <= 0;
                     end
         end
         
 
     end
 
-    
+ // soft reset logic 2   
 always @ (*)
     begin
         if (resetn)
             begin
-                count_read_1 <= 0;
-                soft_reset <= 0;
+                count_read_2 <= 0;
+                soft_reset_2 <= 0;
             end
-        else if (~valid_out_1)
-            begin
-                count_read_1 <= 0;
-                soft_reset <= 0;
-            end
-        else if (read_enb_1)
+        else if (~valid_out_2)
             begin
                 count_read_2 <= 0;
-                soft_reset <= 0;
+                soft_reset_2 <= 0;
+            end
+        else if (read_enb_2)
+            begin
+                count_read_2 <= 0;
+                soft_reset_2 <= 0;
             end
         else begin
-            if (count_read_1 == 29)
+            if (count_read_2 == 29)
                 begin
-                    count_read_1 <=0;
-                    soft_reset <=1;
+                    count_read_2 <=0;
+                    soft_reset_2 <=1;
                 end
                 else 
                     begin
-                        count_read_1 <= count_read_1 + 1;
-                        soft_reset <= 0;
+                        count_read_2 <= count_read_2 + 1;
+                        soft_reset_2 <= 0;
                     end
         end
         
