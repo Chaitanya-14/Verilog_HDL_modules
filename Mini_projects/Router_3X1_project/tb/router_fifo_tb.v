@@ -1,3 +1,4 @@
+`timescale 1ns/1ps
 module router_fifo_tb;
     reg clock,resetn,soft_reset,write_enb,read_enb,lfd_state;
     reg [7:0] data_in;
