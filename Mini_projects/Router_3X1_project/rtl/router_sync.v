@@ -14,7 +14,7 @@ module router_sync # (parameter FIFO1 = 3'b001, FIFO2 = 3'b010, FIFO3 = 3'b100 )
                     input full_1,
                     input full_2,
                     output reg [2:0] write_enb,
-                    output fifo_full,
+                    output reg fifo_full,
                     output valid_out_0,
                     output valid_out_1,
                     output valid_out_2,
@@ -24,7 +24,6 @@ module router_sync # (parameter FIFO1 = 3'b001, FIFO2 = 3'b010, FIFO3 = 3'b100 )
 
 // internal register
 reg [1:0] addr;
-reg [2:0] write_enb;
 reg [4:0] count_read_0;
 reg [4:0] count_read_1;
 reg [4:0] count_read_2;
