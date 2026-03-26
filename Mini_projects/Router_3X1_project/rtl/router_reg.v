@@ -29,18 +29,18 @@ always @(posedge clock)
         else if ((ld_state && !fifo_full && !pkt_valid) || (laf_state && !parity_done && low_pkt_valid)) // it will be asserted only when packet parity is recieved from source lan within the register block
             parity_done <=  1'b1;
         else if (detect_addr)
-            partiy_done <= 1'b0; //parity done is initialised when new address is detected
+            parity_done <= 1'b0; //parity done is initialised when new address is detected
     end
 
 //low_pkt_valid logic
 always@(posedge clock)
     begin
         if (~resetn)
-            low_pkt_valid = 1'b0;
+            low_pkt_valid <= 1'b0;
         else if(ld_state == 1 && pkt_valid == 0)
-            low_pkt_valid = 1'b1;
+            low_pkt_valid <= 1'b1;
         else if (rst_int_reg)
-            low_pkt_valid = 1'b0;
+            low_pkt_valid <= 1'b0;
     end
 
 // register dout logic
@@ -55,14 +55,14 @@ always@(posedge clock)
         else begin 
             if (detect_addr && pkt_valid == 1 && data_in [1:0] != 2'b11)
                 first_byte <= data_in;
-            else if (lfd _state)
-                d_out <= first_byte;
+            else if (lfd_state)
+                dout <= first_byte;
             else if (ld_state && !fifo_full) //payload bytes loading
-                d_out <= data_in; 
-            else if(ld_state && fifo_full). // if the fifo is full the data can't be directed to d_out, we store it in full_state_byte internal reg
+                dout <= data_in; 
+            else if(ld_state && fifo_full) // if the fifo is full the data can't be directed to d_out, we store it in full_state_byte internal reg
                 full_state_byte <= data_in; //full_state_byte can be parity or can be payload data
             else if (laf_state) // load after full is high thenfifo_full =0 fifo is loadable 
-                d_out <= full_state_byte;
+                dout <= full_state_byte;
         end
     end
 
@@ -75,9 +75,9 @@ always@(posedge clock)
                 internal_parity <= 8'h00;   
             else if(lfd_state)
                 begin
-                    internal_party <= internal_party ^ first_byte;
+                    internal_parity <= internal_parity ^ first_byte;
                 end
-            else if (ld_state && pkt_valid && !full_state) //given !full_state cause this repeats till fifo is full and data_in will be unique value
+            else if (ld_state && pkt_valid) // XOR data even if FIFO is full, as it's stored in full_state_byte
                 begin
                     internal_parity <= internal_parity ^ data_in; //this continues
                 end
@@ -92,7 +92,7 @@ always@(posedge clock)
         else if (detect_addr)
             pkt_parity <= 8'h00;
         else if ((ld_state && !pkt_valid && !fifo_full) || (laf_state && low_pkt_valid && !parity_done)) // (end of current packet) (end of current packet ) and data in will be the parity packet
-            pkt_parity <= data_in
+            pkt_parity <= data_in;
     end
 
 // error logic
@@ -102,7 +102,7 @@ always@(posedge clock)
             err <= 1'b0;
         else if (!parity_done)
             err <= 1'b0;
-        else if (pkt_parity != internal _parity)
+        else if (pkt_parity != internal_parity)
             err <= 1'b1;
         else 
             err <= 1'b0;

@@ -2,7 +2,7 @@
 module router_reg_tb;
 // global variables
     reg clock;
-    reg reset;
+    reg resetn;
     reg pkt_valid;
     reg [7:0] data_in;
     reg fifo_full;
@@ -23,7 +23,7 @@ module router_reg_tb;
 
     // instantiation
     router_reg dut (.clock(clock),
-                    .reset(reset),
+                    .resetn(resetn),
                     .pkt_valid(pkt_valid),
                     .data_in(data_in),
                     .fifo_full(fifo_full),
@@ -57,7 +57,7 @@ module router_reg_tb;
     // intitalisation of input values
     task initialise;
         begin
-            (pkt_valid,fifo_full,rst_int_reg,detect_addr,ld_state,laf_state,full_state,lfd_state,data_in) = 0;
+            {pkt_valid,fifo_full,rst_int_reg,detect_addr,ld_state,laf_state,full_state,lfd_state,data_in} = 0;
         end 
     endtask
 
@@ -81,10 +81,10 @@ module router_reg_tb;
                     full_state = 1'b0;
                     fifo_full = 1'b0;
                     laf_state = 1'b0;
-                    for(i=0;i<payload_len;i=i+1)
+                @(negedge clock) lfd_state = 1'b0; // Clear lfd_state after one cycle
+                for(i=0;i<payload_len;i=i+1)
                         begin
                             @(negedge clock)
-                                lfd_state = 1'b0;
                                 ld_state = 1'b1;
                                 payload_data = {$random} %256;
                                 data_in = payload_data;
@@ -106,11 +106,11 @@ module router_reg_tb;
         begin
             @(negedge clock)
                 payload_len = 6'd3;
-                addr = 1'b01; // valid address and packet
+                addr = 2'b01; // valid address and packet
                 pkt_valid = 1'b1;
                 detect_addr = 1'b1;
                 header = {payload_len,addr};
-                partiy = 0^header;
+                parity = 0^header;
                 data_in = header;
             @(negedge clock)
                 detect_addr = 0;
@@ -118,13 +118,14 @@ module router_reg_tb;
                 full_state = 0;
                 fifo_full= 0;
                 laf_state = 0;
+            @(negedge clock) lfd_state = 1'b0;
                 for (i=0;i<payload_len;i=i+1)
                     begin
-                        lfd_state = 1'b0;
-                        ld_state = 1'b1;
-                        payload_data = {$random} % 256;
-                        data_in = payload_data;
-                        parity = parity ^ payload_data;
+                        @(negedge clock) // Fixed missing clock edge
+                            ld_state = 1'b1;
+                            payload_data = {$random} % 256;
+                            data_in = payload_data;
+                            parity = parity ^ payload_data;
                     end
             @(negedge clock)
                 pkt_valid = 1'b0;
@@ -137,6 +138,8 @@ module router_reg_tb;
     // stimulus task
     initial
         begin
+            $dumpfile("router_register.vcd");
+            $dumpvars(0,router_reg_tb);
             initialise;
             rst_dut;
             good_packet;
