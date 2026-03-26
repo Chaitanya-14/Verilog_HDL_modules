@@ -25,7 +25,7 @@ module seq_det(seq_in,
 				present_state <= next_state;
 		end
 
-		
+	// combinational logic for next state
    always@(present_state,seq_in)
       begin
 	 case(present_state)
