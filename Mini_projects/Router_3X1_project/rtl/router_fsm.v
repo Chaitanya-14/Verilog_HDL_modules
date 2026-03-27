@@ -138,8 +138,9 @@ always@(*) // to make sure there is no latch, we use * - all the events are incl
 assign detect_addr      = (present_state == `DECODE_ADDRESS) ? 1'b1 : 1'b0;
 assign lfd_state        = (present_state == `LOAD_FIRST_DATA) ? 1'b1 : 1'b0;
 assign ld_state         = (present_state == `LOAD_DATA) ? 1'b1 : 1'b0;
+assign rst_int_reg      = (present_state == `CHECK_PARITY_ERROR) ? 1'b1 : 1'b0; 
 assign full_state       = (present_state == `FIFO_FULL_STATE) ?   1'b1 : 1'b0;
-assign laf_state         = (present_state == `LOAD_AFTER_FULL) ? 1'b1 : 1'b0;
+assign laf_state        = (present_state == `LOAD_AFTER_FULL) ? 1'b1 : 1'b0;
 assign write_enb_reg    = ((present_state == `LOAD_DATA) || (present_state == `LOAD_AFTER_FULL) || (present_state == `LOAD_PARITY)) ? 1'b1 : 1'b0;
 assign busy             = ((present_state == `FIFO_FULL_STATE) || (present_state == `LOAD_FIRST_DATA) || (present_state == `LOAD_AFTER_FULL) || (present_state == `LOAD_PARITY) || 
                              (present_state == `CHECK_PARITY_ERROR) || (present_state == `WAIT_TILL_EMPTY)) ? 1'b1 : 1'b0;
