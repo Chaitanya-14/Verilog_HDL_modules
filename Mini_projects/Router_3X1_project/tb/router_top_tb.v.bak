@@ -55,9 +55,7 @@ module router_top_tb;
 
     //clock generation code
     initial
-    begin
     clock = 1'b0;
-    end
     always #(CYCLE/2) clock = ~clock;
 
     //reset task
@@ -109,7 +107,8 @@ module router_top_tb;
             rst_dut;
             repeat(3) @(negedge clock);
             pkt_gen_14;
-            repeat(2) @(negedge clock);
+            repeat(2);
+            @(negedge clock);
             read_enb_1 = 1;
             wait(~valid_out_1);
             @(negedge clock);
