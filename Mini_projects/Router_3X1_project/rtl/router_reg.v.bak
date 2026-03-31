@@ -78,7 +78,7 @@ always@(posedge clock)
                 begin
                     internal_parity <= internal_parity ^ first_byte;
                 end
-            else if (ld_state && !full_state && pkt_valid) // XOR data even if FIFO is full, as it's stored in full_state_byte
+            else if (ld_state && pkt_valid) // XOR data even if FIFO is full, as it's stored in full_state_byte
                 begin
                     internal_parity <= internal_parity ^ data_in; //this continues
                 end

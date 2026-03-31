@@ -129,7 +129,7 @@ module router_reg_tb;
                     end
             @(negedge clock)
                 pkt_valid = 1'b0;
-                data_in = ~parity; // nagating the parity and sending it into the data_in
+                data_in = ~parity;
             @(negedge clock)
                 ld_state = 1'b0;
         end
