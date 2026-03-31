@@ -127,7 +127,7 @@ lfd_state_flag    : Tracks first data load (bug fix for data alignment)
 **Why this matters**: The register ensures that packets are correctly parsed, validated, and directed—preventing corrupted data from entering the network.
 
 #### RTL Diagram:
-![Register RTL View](rtl_png/RTL_view_of_Register.png)
+![Register RTL View](Router_3X1_project/rtl_png/RTL_view_of_Register.png)
 
 ---
 
@@ -168,7 +168,7 @@ else if (count != 0)
 This allows the output port to know exactly how many bytes to read before the next packet arrives.
 
 #### RTL Diagram:
-![FIFO RTL View](rtl_png/RTL_view_of_FIFO.png)
+![FIFO RTL View](Router_3X1_project/rtl_png/RTL_view_of_FIFO.png)
 
 ---
 
@@ -199,7 +199,7 @@ endcase
 **Timeout Logic**: If a FIFO isn't read for 30 cycles (congestion), a `soft_reset` clears it to prevent deadlock.
 
 #### RTL Diagram:
-![Synchroniser RTL View](rtl_png/RTL_view_of_Synchroniser.png)
+![Synchroniser RTL View](Router_3X1_project/rtl_png/RTL_view_of_Synchroniser.png)
 
 ---
 
@@ -208,7 +208,7 @@ endcase
 The FSM orchestrates the entire packet flow through 8 states:
 
 #### FSM State Diagram:
-![FSM State Diagram](rtl_png/FSM%20state%20diagram.png)
+![FSM State Diagram](Router_3X1_project/rtl_png/FSM%20state%20diagram.png)
 
 #### State Descriptions:
 
@@ -234,7 +234,7 @@ rst_int_reg   : Reset internal registers (parity, etc.)
 ```
 
 #### FSM RTL View:
-![FSM RTL View](rtl_png/FSM%20RTL%20view.png)
+![FSM RTL View](Router_3X1_project/rtl_png/FSM%20RTL%20view.png)
 
 ---
 
@@ -257,7 +257,7 @@ FSM ──→ Controls signal flow
 ```
 
 #### RTL Diagram:
-![Router Top RTL View](rtl_png/RTL_view_of_Router_Top.png)
+![Router Top RTL View](Router_3X1_project/rtl_png/RTL_view_of_Router_Top.png)
 
 ---
 
@@ -286,7 +286,7 @@ FSM ──→ Controls signal flow
 ### Simulation Scenarios:
 
 #### Scenario 1: Normal Packet Processing
-![FSM Waveform Analysis](rtl_png/Waveform%20analysis%20FSM%202%20scenarios.png)
+![FSM Waveform Analysis](Router_3X1_project/rtl_png/Waveform%20analysis%20FSM%202%20scenarios.png)
 
 - Packet arrives with valid address
 - FSM transitions through LOAD_FIRST_DATA → LOAD_DATA → LOAD_PARITY
@@ -294,7 +294,7 @@ FSM ──→ Controls signal flow
 - Parity verified successfully
 
 #### Scenario 2: Register Functionality with Error Detection
-![Register Waveform Analysis](rtl_png/Waveform%20analysis%20register%20functionality%20with%20and%20without%20error.png)
+![Register Waveform Analysis](Router_3X1_project/rtl_png/Waveform%20analysis%20register%20functionality%20with%20and%20without%20error.png)
 
 - Shows register output (`dout`) tracking input (`data_in`)
 - Parity calculation progression
@@ -302,8 +302,8 @@ FSM ──→ Controls signal flow
 - Demonstrates state-dependent output switching
 
 #### Scenario 3: FIFO & Synchroniser Behavior
-![FIFO Status Signals](rtl_png/Register%20stats%20FIFO.png)
-![Synchroniser Status Signals](rtl_png/Registers%20stats%20synchroniser.png)
+![FIFO Status Signals](Router_3X1_project/rtl_png/Register%20stats%20FIFO.png)
+![Synchroniser Status Signals](Router_3X1_project/rtl_png/Registers%20stats%20synchroniser.png)
 
 - FIFO full/empty status changes
 - Write pointer and read pointer management
