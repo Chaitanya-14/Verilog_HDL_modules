@@ -164,6 +164,7 @@ always @ (posedge clock)
 always @ (*)
     begin
         case (addr)
+        
             2'b00 :  fifo_full = full_0;
             2'b01 :  fifo_full = full_1;
             2'b10 :  fifo_full = full_2;
