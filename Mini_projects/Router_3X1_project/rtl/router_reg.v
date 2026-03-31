@@ -19,6 +19,19 @@ reg [7:0] full_state_byte;
 reg [7:0] pkt_parity;
 reg [7:0] first_byte;
 reg [7:0] internal_parity;
+reg lfd_state_flag;  // Flag to track if we just left LOAD_FIRST_DATA
+
+
+// Track when first_byte should be output
+always@(posedge clock)
+    begin
+        if(~resetn)
+            lfd_state_flag <= 1'b0;
+        else if(lfd_state)
+            lfd_state_flag <= 1'b1;
+        else if(ld_state && !fifo_full && lfd_state_flag)
+            lfd_state_flag <= 1'b0;  // Clear after first write
+    end
 
 
 // parity done logic
@@ -57,11 +70,16 @@ always@(posedge clock)
                 first_byte <= data_in;
             else if (lfd_state)
                 dout <= first_byte;
-            else if (ld_state && !fifo_full) //payload bytes loading
-                dout <= data_in; 
-            else if(ld_state && fifo_full) // if the fifo is full the data can't be directed to d_out, we store it in full_state_byte internal reg
-                full_state_byte <= data_in; //full_state_byte can be parity or can be payload data
-            else if (laf_state) // load after full is high thenfifo_full =0 fifo is loadable 
+            else if (ld_state && !fifo_full) 
+                begin
+                    if(lfd_state_flag)  // Keep first_byte on dout during its write cycle
+                        dout <= first_byte;
+                    else
+                        dout <= data_in;  // Payload bytes
+                end
+            else if(ld_state && fifo_full)
+                full_state_byte <= data_in;
+            else if (laf_state) 
                 dout <= full_state_byte;
         end
     end

@@ -77,7 +77,7 @@ module router_top_tb;
     reg [1:0] addr;
         begin
             @(negedge clock);
-            wait(~busy);
+            wait(~busy)
             @(negedge clock);
             payload_len = 6'd14;
             addr = 2'b01;

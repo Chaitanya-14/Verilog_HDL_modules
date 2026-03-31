@@ -17,6 +17,10 @@ module router_fifo #(parameter WIDTH = 8, DEPTH = 16)
     reg [8:0] mem [(DEPTH-1):0]; // depth 16X9 width
 
     integer i;
+    reg lfd_state_d1;
+    
+    always@(posedge clock) // delay the lfd_state by one clock cycle to remove the bug in the wave form where the count will not start because of lfd state going low just before the hear is loaded,
+      lfd_state_d1 <= lfd_state;
 
     //FIFO full and empty logic
     assign empty = (wr_ptr == rd_ptr) ? 1'b1 : 1'b0;
@@ -51,7 +55,7 @@ module router_fifo #(parameter WIDTH = 8, DEPTH = 16)
                 begin
                     if (write_enb && !full)
                         begin
-                            mem[wr_ptr[3:0]] <= {lfd_state,data_in};
+                            mem[wr_ptr[3:0]] <= {lfd_state_d1,data_in};
                             wr_ptr <= wr_ptr + 1'b1;
                         end
                 end
